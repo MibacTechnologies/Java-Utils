@@ -5,18 +5,25 @@ import com.mibactechnologies.java.system.event.EventListener;
 
 public class Main implements EventListener {
     private static EventExecutor eventExec;
-    private final long start;
-    private long took;
 
     public Main() {
+	final long totalStart = System.nanoTime();
 	Main.eventExec = new EventExecutor();
 	Main.eventExec.setDebug(true);
 	Main.eventExec.registerListener(this);
 	Main.eventExec.registerListener(new listener1());
 	Main.eventExec.registerListener(new listener2());
 	Main.eventExec.registerListener(new listener3());
-	start = System.currentTimeMillis();
+	final long start = System.nanoTime();
 	Main.eventExec.callEvent(new CustomEvent());
+	final long end = System.nanoTime();
+	long took = end - start;
+	Main.log("Run time (ms): " + took / 1000000 + "."
+		+ (took + "").substring(1));
+
+	took = end - totalStart;
+	Main.log("Total run time (ms): " + took / 1000000 + "."
+		+ (took + "").substring(1));
     }
 
     public static void log(final String s) {
@@ -30,9 +37,5 @@ public class Main implements EventListener {
 
     public static void main(final String[] args) {
 	new Main();
-    }
-
-    public long getTook() {
-	return took;
     }
 }

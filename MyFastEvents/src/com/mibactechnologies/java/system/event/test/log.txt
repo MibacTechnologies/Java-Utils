@@ -9,3 +9,5 @@ Add listener method: onCustomEvent2 for event CustomEvent2
 Event CustomEvent has 2 handlers.
 2147483647<-- strangeity : bool -->true
 false!
+Run time (ms): 1.056486
+Total run time (ms): 40.0852648
