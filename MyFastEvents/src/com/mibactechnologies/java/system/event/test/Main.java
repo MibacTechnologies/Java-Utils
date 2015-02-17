@@ -10,6 +10,7 @@ public class Main implements EventListener {
 
     public Main() {
 	Main.eventExec = new EventExecutor();
+	Main.eventExec.setDebug(true);
 	Main.eventExec.registerListener(this);
 	Main.eventExec.registerListener(new listener1());
 	Main.eventExec.registerListener(new listener2());

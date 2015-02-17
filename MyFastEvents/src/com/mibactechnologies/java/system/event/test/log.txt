@@ -1,0 +1,11 @@
+--- log from console in debug mode ---
+Register event listener: com.mibactechnologies.java.system.event.test.Main@1db9742
+Register event listener: com.mibactechnologies.java.system.event.test.listener1@52e922
+Add listener method: CustomEventTest1 for event CustomEvent
+Register event listener: com.mibactechnologies.java.system.event.test.listener2@16f6e28
+Add listener method: CustomEventTest1 for event CustomEvent
+Register event listener: com.mibactechnologies.java.system.event.test.listener3@1ee12a7
+Add listener method: onCustomEvent2 for event CustomEvent2
+Event CustomEvent has 2 handlers.
+2147483647<-- strangeity : bool -->true
+false!
