@@ -1,9 +1,9 @@
 package com.mibactechnologies.java.system.event.test;
 
 import com.mibactechnologies.java.system.event.EventExecutor;
-import com.mibactechnologies.java.system.event.EventListener;
+import com.mibactechnologies.java.system.event.Listener;
 
-public class Main implements EventListener {
+public class Main implements Listener {
     private static EventExecutor eventExec;
 
     public Main() {

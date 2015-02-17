@@ -1,9 +1,9 @@
 package com.mibactechnologies.java.system.event.test;
 
 import com.mibactechnologies.java.system.event.Cancellable;
-import com.mibactechnologies.java.system.event.IEvent;
+import com.mibactechnologies.java.system.event.Event;
 
-public class CustomEvent implements IEvent, Cancellable {
+public class CustomEvent extends Event implements Cancellable {
     private boolean cancelled;
 
     public CustomEvent() {

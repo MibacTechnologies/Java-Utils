@@ -13,21 +13,21 @@ import java.util.TreeSet;
 import com.mibactechnologies.java.system.event.test.Main;
 
 public class EventExecutor {
-    private final Map<Class<? extends IEvent>, Collection<EventHandler>> bindings;
-    private final Set<EventListener> registeredListeners;
+    private final Map<Class<? extends Event>, Collection<EventHandlerAnnotation>> bindings;
+    private final Set<Listener> registeredListeners;
 
     private boolean debug = false;
 
-    private static final EventHandler[] EMPTYHANDLERS = {};
+    private static final EventHandlerAnnotation[] EMPTYHANDLERS = {};
 
     public EventExecutor() {
-	bindings = new HashMap<Class<? extends IEvent>, Collection<EventHandler>>();
-	registeredListeners = new HashSet<EventListener>();
+	bindings = new HashMap<Class<? extends Event>, Collection<EventHandlerAnnotation>>();
+	registeredListeners = new HashSet<Listener>();
     }
 
-    public <T extends IEvent> T callEvent(final T event/* , final int i */) {
-	final Collection<EventHandler> handlers = bindings
-		.get(event.getClass());
+    public <T extends Event> T callEvent(final T event/* , final int i */) {
+	final Collection<EventHandlerAnnotation> handlers = bindings.get(event
+		.getClass());
 
 	if (handlers == null) {
 	    if (debug)
@@ -44,7 +44,7 @@ public class EventExecutor {
 	boolean cancelled = cancellable ? ((Cancellable) event).isCancelled()
 		: false;
 
-	for (final EventHandler handler : handlers) {
+	for (final EventHandlerAnnotation handler : handlers) {
 	    cancelled = cancellable ? ((Cancellable) event).isCancelled()
 		    : false;
 
@@ -61,29 +61,31 @@ public class EventExecutor {
 	registeredListeners.clear();
     }
 
-    private EventHandler createEventHandler(final EventListener listener,
-	    final Method method, final Event annotation) {
-	return new EventHandler(listener, method, annotation);
+    private EventHandlerAnnotation createEventHandler(
+	    final Listener listener, final Method method,
+	    final EventHandler annotation) {
+	return new EventHandlerAnnotation(listener, method, annotation);
     }
 
-    public Map<Class<? extends IEvent>, Collection<EventHandler>> getBindings() {
-	return new HashMap<Class<? extends IEvent>, Collection<EventHandler>>(
+    public Map<Class<? extends Event>, Collection<EventHandlerAnnotation>> getBindings() {
+	return new HashMap<Class<? extends Event>, Collection<EventHandlerAnnotation>>(
 		bindings);
     }
 
-    public EventHandler[] getListenersFor(final Class<? extends IEvent> clazz) {
-	final Collection<EventHandler> handlers = bindings.get(clazz);
+    public EventHandlerAnnotation[] getListenersFor(
+	    final Class<? extends Event> clazz) {
+	final Collection<EventHandlerAnnotation> handlers = bindings.get(clazz);
 	if (handlers == null || handlers.isEmpty())
 	    return EventExecutor.EMPTYHANDLERS; // No handlers so we return an
 	// empty list
-	return handlers.toArray(new EventHandler[handlers.size()]);
+	return handlers.toArray(new EventHandlerAnnotation[handlers.size()]);
     }
 
-    public Set<EventListener> getRegisteredListeners() {
-	return new HashSet<EventListener>(registeredListeners);
+    public Set<Listener> getRegisteredListeners() {
+	return new HashSet<Listener>(registeredListeners);
     }
 
-    public void registerListener(final EventListener listener) {
+    public void registerListener(final Listener listener) {
 	if (debug)
 	    Main.log("Register event listener: " + listener);
 
@@ -98,7 +100,8 @@ public class EventExecutor {
 	final Method[] methods = listener.getClass().getDeclaredMethods();
 
 	for (final Method method : methods) {
-	    final Event annotation = method.getAnnotation(Event.class);
+	    final EventHandler annotation = method
+		    .getAnnotation(EventHandler.class);
 	    if (annotation == null)
 		continue;
 
@@ -116,15 +119,16 @@ public class EventExecutor {
 		continue;
 	    }
 
-	    if (IEvent.class.isAssignableFrom(param)) {
+	    if (Event.class.isAssignableFrom(param)) {
 		@SuppressWarnings("unchecked")
 		// Java just doesn't understand that this actually is a safe
 		// cast because of the above if-statement
-		final Class<? extends IEvent> realParam = (Class<? extends IEvent>) param;
+		final Class<? extends Event> realParam = (Class<? extends Event>) param;
 
 		if (!bindings.containsKey(realParam))
-		    bindings.put(realParam, new TreeSet<EventHandler>());
-		final Collection<EventHandler> eventHandlersForEvent = bindings
+		    bindings.put(realParam,
+			    new TreeSet<EventHandlerAnnotation>());
+		final Collection<EventHandlerAnnotation> eventHandlersForEvent = bindings
 			.get(realParam);
 		if (debug)
 		    Main.log("Add listener method: " + method.getName()
@@ -135,12 +139,13 @@ public class EventExecutor {
 	}
     }
 
-    public void removeListener(final EventListener listener) {
-	for (final Entry<Class<? extends IEvent>, Collection<EventHandler>> ee : bindings
+    public void removeListener(final Listener listener) {
+	for (final Entry<Class<? extends Event>, Collection<EventHandlerAnnotation>> ee : bindings
 		.entrySet()) {
-	    final Iterator<EventHandler> it = ee.getValue().iterator();
+	    final Iterator<EventHandlerAnnotation> it = ee.getValue()
+		    .iterator();
 	    while (it.hasNext()) {
-		final EventHandler curr = it.next();
+		final EventHandlerAnnotation curr = it.next();
 		if (curr.getListener() == listener)
 		    it.remove();
 	    }
