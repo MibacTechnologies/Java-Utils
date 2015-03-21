@@ -61,9 +61,8 @@ public class EventExecutor {
 	registeredListeners.clear();
     }
 
-    private EventHandlerAnnotation createEventHandler(
-	    final Listener listener, final Method method,
-	    final EventHandler annotation) {
+    private EventHandlerAnnotation createEventHandler(final Listener listener,
+	    final Method method, final EventHandler annotation) {
 	return new EventHandlerAnnotation(listener, method, annotation);
     }
 
@@ -99,7 +98,9 @@ public class EventExecutor {
 
 	final Method[] methods = listener.getClass().getDeclaredMethods();
 
-	for (final Method method : methods) {
+	for (int i = 0; i < methods.length; i++) {
+	    final Method method = methods[i];
+
 	    final EventHandler annotation = method
 		    .getAnnotation(EventHandler.class);
 	    if (annotation == null)

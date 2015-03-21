@@ -6,7 +6,7 @@ import com.mibactechnologies.java.system.event.Listener;
 public class listener1 implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void CustomEventTest1(final CustomEvent e) {
-	System.out.println(e.getStrangeity() + "<-- strangeity : bool -->"
-		+ e.isThisTestWhichProbobalyWontWork());
+	// System.out.println(e.getStrangeity() + "<-- strangeity : bool -->"
+	// + e.isThisTestWhichProbobalyWontWork());
     }
 }

@@ -1,9 +1,10 @@
 package com.mibactechnologies.java.system.event;
 
 /**
- * Marker interface for classes that can be scanned for @Event annotations
+ * Marker interface for classes that can be scanned for @EventHandler
+ * annotations.
  * 
- * @see EventHandler
+ * @see EventExecutor
  */
 public interface Listener {
 }

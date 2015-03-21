@@ -11,3 +11,8 @@ Event CustomEvent has 2 handlers.
 false!
 Run time (ms): 1.056486
 Total run time (ms): 40.0852648
+
+Statistics (log 2) - 100 000 cycles:
+Max time: 23.3006259 [ms]
+Min time: 0.0575 [ms]
+Avg time: 0.09166803172 [ms]
