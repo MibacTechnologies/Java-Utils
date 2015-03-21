@@ -18,16 +18,12 @@ public class Main implements Listener {
 	Main.eventExec.callEvent(new CustomEvent());
 	final long end = System.nanoTime();
 	long took = end - start;
-	Main.log("Run time (event calling): " + took / 1000000 + "."
+	System.out.println("Run time (event calling): " + took / 1000000 + "."
 		+ (took + "").substring(1) + " [ms]");
 
 	took = end - totalStart;
-	Main.log("Total run time: " + took / 1000000 + "."
+	System.out.println("Total run time: " + took / 1000000 + "."
 		+ (took + "").substring(1) + " [ms]");
-    }
-
-    public static void log(final String s) {
-	System.out.println(s);
     }
 
     public static void log(final String s, final Exception e) {
@@ -36,6 +32,15 @@ public class Main implements Listener {
     }
 
     public static void main(final String[] args) {
+	// final PrintStream ps = new PrintStream(System.out) {
+	// @Override
+	// public void println(final String x) {
+	// super.println(x);
+	// }
+	// };
+
+	// System.setOut(ps);
+
 	// int cycles = 100000;
 	// final long times[] = new long[cycles];
 
@@ -51,10 +56,12 @@ public class Main implements Listener {
 	// final long min = LongStream.of(times).min().getAsLong();
 	// final double avg = LongStream.of(times).average().getAsDouble();
 
-	// Main.log("Max time: " + max / 1000000 + "." + (max + "").substring(1)
+	// System.out.println("Max time: " + max / 1000000 + "." + (max +
+	// "").substring(1)
 	// + " [ms]");
-	// Main.log("Min time: " + min / 1000000 + "." + (min + "").substring(1)
+	// System.out.println("Min time: " + min / 1000000 + "." + (min +
+	// "").substring(1)
 	// + " [ms]");
-	// Main.log("Avg time: " + avg / 1000000 + " [ms]");
+	// System.out.println("Avg time: " + avg / 1000000 + " [ms]");
     }
 }

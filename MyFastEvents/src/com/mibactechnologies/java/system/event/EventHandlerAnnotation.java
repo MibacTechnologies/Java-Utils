@@ -2,8 +2,6 @@ package com.mibactechnologies.java.system.event;
 
 import java.lang.reflect.Method;
 
-import com.mibactechnologies.java.system.event.test.Main;
-
 class EventHandlerAnnotation implements Comparable<EventHandlerAnnotation> {
     private final Listener listener;
     private final Method method;
@@ -27,8 +25,9 @@ class EventHandlerAnnotation implements Comparable<EventHandlerAnnotation> {
 	try {
 	    method.invoke(listener, event);
 	} catch (final Exception e) {
-	    Main.log("Exception when performing EventHandler " + listener
-		    + " for event " + event.toString(), e);
+	    System.out.println("Exception when performing EventHandler "
+		    + listener + " for event " + event.toString());
+	    e.printStackTrace();
 	    throw new IllegalStateException("Unable to call " + method, e);
 	}
     }

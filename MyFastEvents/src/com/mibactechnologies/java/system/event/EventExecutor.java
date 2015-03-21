@@ -10,8 +10,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
-import com.mibactechnologies.java.system.event.test.Main;
-
 public class EventExecutor {
     private final Map<Class<? extends Event>, Collection<EventHandlerAnnotation>> bindings;
     private final Set<Listener> registeredListeners;
@@ -31,14 +29,14 @@ public class EventExecutor {
 
 	if (handlers == null) {
 	    if (debug)
-		Main.log("Event " + event.getClass().getSimpleName()
+		System.out.println("Event " + event.getClass().getSimpleName()
 			+ " has no handlers.");
 	    return event;
 	}
 
 	if (debug)
-	    Main.log("Event " + event.getClass().getSimpleName() + " has "
-		    + handlers.size() + " handlers.");
+	    System.out.println("Event " + event.getClass().getSimpleName()
+		    + " has " + handlers.size() + " handlers.");
 
 	final boolean cancellable = event instanceof Cancellable;
 	boolean cancelled = cancellable ? ((Cancellable) event).isCancelled()
@@ -86,11 +84,11 @@ public class EventExecutor {
 
     public void registerListener(final Listener listener) {
 	if (debug)
-	    Main.log("Register event listener: " + listener);
+	    System.out.println("Register event listener: " + listener);
 
 	if (registeredListeners.contains(listener)) {
 	    if (debug)
-		Main.log("Listener already registred: " + listener);
+		System.out.println("Listener already registred: " + listener);
 	    return;
 	}
 
@@ -115,8 +113,9 @@ public class EventExecutor {
 
 	    if (!method.getReturnType().equals(void.class)) {
 		if (debug)
-		    Main.log("Ignoring method due to non-void return: "
-			    + method.getName());
+		    System.out
+			    .println("Ignoring method due to non-void return: "
+				    + method.getName());
 		continue;
 	    }
 
@@ -132,8 +131,9 @@ public class EventExecutor {
 		final Collection<EventHandlerAnnotation> eventHandlersForEvent = bindings
 			.get(realParam);
 		if (debug)
-		    Main.log("Add listener method: " + method.getName()
-			    + " for event " + realParam.getSimpleName());
+		    System.out.println("Add listener method: "
+			    + method.getName() + " for event "
+			    + realParam.getSimpleName());
 		eventHandlersForEvent.add(createEventHandler(listener, method,
 			annotation));
 	    }
