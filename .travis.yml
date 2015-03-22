@@ -1,10 +1,19 @@
 language: java
-
 jdk:
   - oraclejdk8
   - oraclejdk7
   - openjdk7
-#  - openjdk6
-
+before_script: chmod a+x build.sh
+script: "./build.sh"
+deploy:
+  provider: releases
+  api-key: "8a4c91dcc72af776939a5fbf5fe4dadb1c586e0d"
+  file: "./build/jar/MyFastEvents.jar"
+  skip_cleanup: true
+  on:
+    tags: true
+    all_branches: true
+notifications:
+  email: false
 after_success:
   - bash javadoc.sh
