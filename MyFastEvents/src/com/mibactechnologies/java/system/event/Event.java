@@ -16,6 +16,20 @@ public class Event {
 	this.name = name;
     }
 
+    @Override
+    public boolean equals(final Object obj) {
+	if (obj == this)
+	    return true;
+
+	if (!(obj instanceof Event))
+	    return false;
+
+	if (((Event) obj).toString() == toString())
+	    return true;
+
+	return false;
+    }
+
     /**
      * Convenience method for providing a user-friendly identifier. By default,
      * it is the event's class's {@linkplain Class#getSimpleName() simple name}.
