@@ -11,8 +11,8 @@ if [ "$TRAVIS_REPO_SLUG" == "google/truth" ] && \
   git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/google/truth gh-pages > /dev/null
   
   cd gh-pages
-  git config --global user.email "travis@travis-ci.org"
-  git config --global user.name "travis-ci"
+  git config --global user.email "mibac138@wp.pl"
+  git config --global user.name "mibac138"
   git rm -rf api/latest 
   mv ${TARGET}/site/apidocs api/latest
   git add -A -f api/latest
