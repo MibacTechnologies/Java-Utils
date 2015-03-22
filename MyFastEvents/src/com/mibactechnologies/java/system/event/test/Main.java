@@ -14,8 +14,9 @@ public class Main implements Listener {
 	Main.eventExec.registerListener(new listener1());
 	Main.eventExec.registerListener(new listener2());
 	Main.eventExec.registerListener(new listener3());
-	final long start = System.nanoTime();
-	Main.eventExec.callEvent(new CustomEvent());
+	long start = System.nanoTime();
+	final CustomEvent e = new CustomEvent();
+	Main.eventExec.callEvent(e);
 	final long end = System.nanoTime();
 	long took = end - start;
 	System.out.println("Run time (event calling): " + took / 1000000 + "."
@@ -23,6 +24,12 @@ public class Main implements Listener {
 
 	took = end - totalStart;
 	System.out.println("Total run time: " + took / 1000000 + "."
+		+ (took + "").substring(1) + " [ms]");
+
+	start = System.nanoTime();
+	e.toString();
+	took = System.nanoTime() - start;
+	System.out.println("toString method took " + took / 1000000 + "."
 		+ (took + "").substring(1) + " [ms]");
     }
 

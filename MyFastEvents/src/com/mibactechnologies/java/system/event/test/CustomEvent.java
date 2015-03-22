@@ -5,13 +5,21 @@ import com.mibactechnologies.java.system.event.Event;
 
 public class CustomEvent extends Event implements Cancellable {
     private boolean cancelled;
+    private final Integer strangeity;
+    private boolean longName;
 
     public CustomEvent() {
 	cancelled = false;
+	strangeity = Integer.MAX_VALUE;
+    }
+
+    @Override
+    public String getEventName() {
+	return "testEvent";
     }
 
     public int getStrangeity() {
-	return Integer.MAX_VALUE;
+	return strangeity;
     }
 
     @Override
@@ -20,7 +28,7 @@ public class CustomEvent extends Event implements Cancellable {
     }
 
     public boolean isThisTestWhichProbobalyWontWork() {
-	return true;
+	return longName;
     }
 
     @Override
@@ -28,8 +36,4 @@ public class CustomEvent extends Event implements Cancellable {
 	this.cancelled = cancelled;
     }
 
-    @Override
-    public String toString() {
-	return this.getClass().getSimpleName() + ", cancelled=" + cancelled;
-    }
 }

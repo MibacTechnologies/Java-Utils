@@ -23,7 +23,7 @@ public class EventExecutor {
 	registeredListeners = new HashSet<Listener>();
     }
 
-    public <T extends Event> T callEvent(final T event/* , final int i */) {
+    public <T extends Event> T callEvent(final T event) {
 	final Collection<EventHandlerAnnotation> handlers = bindings.get(event
 		.getClass());
 
@@ -114,8 +114,8 @@ public class EventExecutor {
 	    if (!method.getReturnType().equals(void.class)) {
 		if (debug)
 		    System.out
-			    .println("Ignoring method due to non-void return: "
-				    + method.getName());
+		    .println("Ignoring method due to non-void return: "
+			    + method.getName());
 		continue;
 	    }
 
