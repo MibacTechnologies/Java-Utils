@@ -1,4 +1,8 @@
 <project name="Java-Utils" basedir=".">
+  <!-- set global properties for this build -->
+  <property name="src" location="./"/>
+  <property name="build" location=".build"/>
+  <property name="dist"  location=".dist"/>
 <target name="init">
     <!-- Create the time stamp -->
     <tstamp/>
