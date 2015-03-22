@@ -8,11 +8,11 @@ if [ "$TRAVIS_REPO_SLUG" == "MibacTechnologies/Java-Utils" ] && \
   TARGET="$(pwd)/target"
 
   cd $HOME
-  git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/google/truth gh-pages > /dev/null
+  git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/MibacTechnologies/Java-Utils gh-pages > /dev/null
   
   cd gh-pages
-  git config --global user.email "mibac138@wp.pl"
-  git config --global user.name "mibac138"
+  git config --global user.email "travis@travis-ci.org"
+  git config --global user.name "travis"
   git rm -rf api/latest 
   mv ${TARGET}/site/apidocs api/latest
   git add -A -f api/latest
