@@ -16,4 +16,4 @@ deploy:
 notifications:
   email: false
 after_success:
-  - bash javadoc.sh
+  #- bash javadoc.sh
